@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as Actions from './actions/messages';
+import * as Actions from '../actions/messages';
 import './App.css';
+import Navbar from './Navbar';
+import MessageList from './MessageList';
+import Sidebar from './Sidebar';
+import Toolbar from './Toolbar';
 
 class App extends Component {
 
@@ -12,10 +16,9 @@ class App extends Component {
 
   render() {
     const { messages } = this.props;
-    console.log(messages);
     return (
       <div>
-        <h1>App Header</h1>
+        <Navbar/>
       </div>
     );
   }

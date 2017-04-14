@@ -15,14 +15,16 @@ export default function reducer(state={
         count: action.payload.count,
         nextPage: action.payload.next,
         prevPage: action.payload.previous
-      }
+      };
     }
     case actionType.FETCH_MESSAGES_REJECTED: {
       return {
         ...state,
         error: action.payload
-      }
+      };
+    }
+    default: {
+      return state;
     }
   }
-  return state
 };
