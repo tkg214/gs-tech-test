@@ -1,4 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as Actions from '../actions/messages';
 import {List, ListItem} from 'material-ui/List';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
@@ -12,8 +15,8 @@ class Sidebar extends Component {
     super();
     this.state = {
       open: false,
-    }
-  }
+    };
+  };
 
   _handleOpen() {
     this.setState({open: true});
@@ -27,8 +30,8 @@ class Sidebar extends Component {
 
   _handleSubmit(e) {
     e.preventDefault();
-    const messageInput = document.getElementById('message-input')
-    console.log(messageInput.value)
+    const messageInput = document.getElementById('message-input');
+    this.props.actions.postMessage(messageInput.value);
     this.setState({
       open: false,
     });
@@ -75,8 +78,18 @@ class Sidebar extends Component {
           />
         </Dialog>
       </nav>
-    )
-  }
-}
+    );
+  };
+};
 
-export default Sidebar;
+Sidebar.propTypes = {
+  actions: PropTypes.shape({
+    postMessage: PropTypes.func.isRequired
+  })
+};
+
+function mapDispatchToProps(dispatch) {
+  return { actions: bindActionCreators(Actions, dispatch) }
+};
+
+export default connect(null, mapDispatchToProps)(Sidebar);

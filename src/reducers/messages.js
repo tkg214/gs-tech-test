@@ -23,6 +23,10 @@ export default function reducer(state={
         error: action.payload
       };
     }
+    case actionType.POST_MESSAGE_FULFILLED: {
+      console.log(action.payload)
+      return state
+    }
     default: {
       return state;
     }

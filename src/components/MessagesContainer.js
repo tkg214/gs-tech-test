@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as Actions from '../actions/messages';
@@ -16,11 +16,16 @@ class MessagesContainer extends Component {
     const { messages, actions } = this.props;
     return (
       <main>
-        <MessagesToolbar/>
+        <MessagesToolbar messages={messages} actions={actions}/>
         <MessagesList messages={messages} actions={actions}/>
       </main>
     )
   }
+}
+
+MessagesToolbar.propTypes = {
+  actions: PropTypes.object.isRequired,
+  messages: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
