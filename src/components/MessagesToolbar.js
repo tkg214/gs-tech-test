@@ -7,11 +7,11 @@ class MessagesToolbar extends Component {
   render() {
     return (
       <Toolbar>
-        <ToolbarGroup firstChild={true}>
-          <RaisedButton label='Previous Page' primary={true} />
+        <ToolbarGroup>
+          <RaisedButton label='Previous Page' primary={true}/>
         </ToolbarGroup>
         <ToolbarGroup>
-          <RaisedButton label='Next Page' primary={true} />
+          <RaisedButton label='Next Page' primary={true}/>
         </ToolbarGroup>
       </Toolbar>
     );

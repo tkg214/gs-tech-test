@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MessageCard from './MessageCard'
+import moment from 'moment';
 
 class MessagesList extends Component {
 
@@ -8,9 +9,10 @@ class MessagesList extends Component {
     return (
       <section>
         {messages.messages.map(message => {
+          const formattedTimestamp = moment(message.created_at).format('MMMM Do YYYY, h:mm');
           return <MessageCard
                    key={message.id}
-                   timestamp={message.created_at}
+                   timestamp={formattedTimestamp}
                    content={message.text}
                  />
         })}
