@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import MessageCard from './MessageCard'
 import moment from 'moment';
 
@@ -20,5 +20,11 @@ class MessagesList extends Component {
     )
   }
 }
+
+MessagesList.propTypes = {
+  actions: PropTypes.object.isRequired,
+  messages: PropTypes.object.isRequired
+}
+
 
 export default MessagesList;

@@ -19,6 +19,25 @@ export function fetchMessages() {
   };
 };
 
+export function fetchPageMessages(pageReqURL) {
+  return dispatch => {
+    axios.get(pageReqURL)
+    .then(response => {
+      dispatch({
+        type: actionType.FETCH_MESSAGES_FULFILLED,
+        payload: response.data
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: actionType.FETCH_MESSAGES_REJECTED,
+        payload: error
+      });
+    });
+  };
+};
+
+
 export function postMessage(text) {
   return dispatch => {
     axios.post('https://ken-test.herokuapp.com/messages/', { text })

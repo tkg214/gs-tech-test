@@ -24,8 +24,26 @@ export default function reducer(state={
       };
     }
     case actionType.POST_MESSAGE_FULFILLED: {
-      console.log(action.payload)
-      return state
+      if ((!state.nextPage && !state.prevPage && state.messages.length < 5) || (!state.nextPage && state.messages.length < 5)) {
+        let updatedMessages = [...state.messages];
+        updatedMessages.push(action.payload);
+        const prev = state.prevPage;
+        let updatedNextPage;
+        if (!state.prevPage && !state.nextPage && state.messages.length === 5) {
+          updatedNextPage = 'https://ken-test.herokuapp.com/messages/?page=2';
+        } else if (state.messages.length === 5){
+          const pageNum = Number(prev.substr(prev.length - 1)) + 1;
+          updatedNextPage = prev.slice(0, -1) + pageNum;
+        }
+
+        return {
+          ...state,
+          messages: updatedMessages,
+          nextPage: updatedNextPage
+        };
+      } else {
+        return state;
+      }
     }
     default: {
       return state;

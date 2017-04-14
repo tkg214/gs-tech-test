@@ -1,17 +1,17 @@
 import React, { Component, PropTypes } from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
 
 class MessagesToolbar extends Component {
 
   _handlePrevClick(e) {
     e.preventDefault();
-
+    this.props.actions.fetchPageMessages(this.props.messages.prevPage);
   }
 
   _handleNextClick(e) {
     e.preventDefault();
-
+    this.props.actions.fetchPageMessages(this.props.messages.nextPage);
   }
 
 
@@ -20,7 +20,7 @@ class MessagesToolbar extends Component {
     return (
       <Toolbar>
         <ToolbarGroup>
-          <RaisedButton
+          <FlatButton
             label='Previous Page'
             disabled={messages.prevPage ? false : true}
             primary={true}
@@ -28,7 +28,7 @@ class MessagesToolbar extends Component {
           />
         </ToolbarGroup>
         <ToolbarGroup>
-          <RaisedButton
+          <FlatButton
             label='Next Page'
             disabled={messages.nextPage ? false : true}
             primary={true}
