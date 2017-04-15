@@ -11,3 +11,12 @@
 * view all details of a single message
 * delete messages
 * allow posting a new message
+
+# To Start:
+
+* Please enter npm install to download dependencies
+* Please enter npm start to start the dev server. localhost:3000 will open automatically in the default browser
+
+# Stack:
+
+* React, Redux, Material UI 
