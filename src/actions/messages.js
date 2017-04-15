@@ -55,3 +55,26 @@ export function postMessage(text) {
     });
   };
 };
+
+export function deleteMessage(id) {
+  return dispatch => {
+    axios.delete('https://ken-test.herokuapp.com/messages/' + id + '/', {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    })
+    .then(response => {
+      dispatch({
+        type: actionType.DELETE_MESSAGE_FULFILLED,
+        payload: id
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: actionType.DELETE_MESSAGE_REJECTED,
+        payload: error
+      });
+    });
+  };
+};

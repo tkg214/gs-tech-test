@@ -14,6 +14,8 @@ class MessagesList extends Component {
                    key={message.id}
                    timestamp={formattedTimestamp}
                    content={message.text}
+                   actions={actions}
+                   id={message.id}
                  />
         })}
       </section>

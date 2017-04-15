@@ -24,26 +24,41 @@ export default function reducer(state={
       };
     }
     case actionType.POST_MESSAGE_FULFILLED: {
-      if ((!state.nextPage && !state.prevPage && state.messages.length < 5) || (!state.nextPage && state.messages.length < 5)) {
+      if ((!state.nextPage && !state.prevPage && state.messages.length <= 5) || (!state.nextPage && state.messages.length <= 5)) {
         let updatedMessages = [...state.messages];
         updatedMessages.push(action.payload);
-        const prev = state.prevPage;
+        const prevURL = state.prevPage;
         let updatedNextPage;
         if (!state.prevPage && !state.nextPage && state.messages.length === 5) {
           updatedNextPage = 'https://ken-test.herokuapp.com/messages/?page=2';
+          return {
+            ...state,
+            nextPage: updatedNextPage
+          };
         } else if (state.messages.length === 5){
-          const pageNum = Number(prev.substr(prev.length - 1)) + 1;
-          updatedNextPage = prev.slice(0, -1) + pageNum;
+          const pageNum = Number(prevURL.substr(prevURL.length - 1)) + 2;
+          updatedNextPage = state.prevPage.slice(0, -1) + String(pageNum);
+          console.log(updatedNextPage)
+          return {
+            ...state,
+            nextPage: updatedNextPage
+          };
         }
 
         return {
           ...state,
-          messages: updatedMessages,
-          nextPage: updatedNextPage
+          messages: updatedMessages
         };
       } else {
         return state;
       }
+    }
+    case actionType.DELETE_MESSAGE_FULFILLED: {
+      let messageList = [...state.messages];
+      let updatedMessages = messageList.filter(message => {
+        return message.id !== action.payload;
+      });
+      return {...state, messages: updatedMessages}
     }
     default: {
       return state;
